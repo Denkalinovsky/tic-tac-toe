@@ -14,6 +14,11 @@
 <script>
 export default {
   name: "Game",
+  props: {
+    isPlayerGame: Boolean,
+    isBotGame: Boolean,
+    isSaveGame: Boolean,
+  },
   data() {
     return {
       /**
@@ -57,6 +62,19 @@ export default {
       localStorage.setItem("gameBoard", JSON.stringify(this.gameBoard));
       localStorage.setItem("whoWalks", this.whoWalks);
     },
+  },
+  mounted() {
+    /**
+     * load save game
+     */
+    if (this.isSaveGame) {
+      this.gameBoard = JSON.parse(localStorage.getItem("gameBoard"));
+      this.whoWalks = localStorage.getItem("whoWalks");
+    }
+    /**
+     * clear localStorage
+     */
+    localStorage.clear();
   },
 };
 </script>
