@@ -4,7 +4,7 @@
       <li>
         <button
           @click="$emit('changeDisplayOption', $event.target.value)"
-          value="newGamePlayer"
+          value="newPlayerGame"
         >
           Start new game with another player
         </button>
@@ -12,12 +12,12 @@
       <li>
         <button
           @click="$emit('changeDisplayOption', $event.target.value)"
-          value="newGameBot"
+          value="newBotGame"
         >
           Start new game with bot
         </button>
       </li>
-      <li>
+      <li v-if="isShowSaveGame">
         <button
           @click="$emit('changeDisplayOption', $event.target.value)"
           value="loadGame"
@@ -32,5 +32,16 @@
 <script>
 export default {
   name: "Welcome",
+  data() {
+    return {
+      isShowSaveGame: false,
+    };
+  },
+  mounted() {
+    /**
+     * check if there is localstorage "gameBoard"
+     */
+    this.isShowSaveGame = !!localStorage.getItem("gameBoard");
+  },
 };
 </script>
