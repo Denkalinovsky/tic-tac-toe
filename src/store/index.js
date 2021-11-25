@@ -4,34 +4,33 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
-    gameBoard: [],
+    gameBoard: {},
+    whoWalks: "",
   },
   mutations: {
-    /*
-     * init game board
-     * @param: {number} size - board size
+    /**
+     * saving the playing field and who will walk at this point
+     * @param: {object} state
+     * @param: {object} gameBoard - contains the playing field
+     * @param: {string} whoWalks - contains the who walks
      */
-    startGame(state, size = 3) {
-      let gameBoard = [];
-      for (let indexRow = 0; indexRow < size; indexRow++) {
-        gameBoard[indexRow] = new Array(size);
-        for (let indexColumn = 0; indexColumn < size; indexColumn++) {
-          gameBoard[indexRow][indexColumn] = {
-            key: Math.random(),
-            valueField: "",
-          };
-        }
-      }
+    saveGame(state, { gameBoard, whoWalks }) {
       state.gameBoard = gameBoard;
+      state.whoWalks = whoWalks;
     },
-    /*
-     * change the value on the game board
-     * @param {number} rowIndex - index row
-     * @param {number} columnIndex - index column
-     * @param {string} valueField - "O"/"X"
-     * */
-    changeItem(state, { rowIndex, columnIndex, valueField }) {
-      state.gameBoard[rowIndex][columnIndex].valueField = valueField;
-    },
+  },
+  getters: {
+    /**
+     * get game board
+     * @param: {object} state
+     * @returns: {object} gameBoard
+     */
+    getGameBoard: (state) => state.gameBoard,
+    /**
+     * get who walks
+     * @param: {object} state
+     * @returns: {string} whoWalks
+     */
+    getWhoWalks: (state) => state.whoWalks,
   },
 });
