@@ -4,7 +4,12 @@
       v-if="'welcome' === displayOption"
       @changeDisplayOption="onChangeDisplayOption"
     />
-    <game v-if="'newGamePlayer' === displayOption" />
+    <game
+      v-if="'welcome' !== displayOption"
+      :isPlayerGame="isPlayerGame"
+      :isBotGame="isBotGame"
+      :isSaveGame="isSaveGame"
+    />
   </div>
 </template>
 
@@ -21,6 +26,9 @@ export default {
   data() {
     return {
       displayOption: "welcome",
+      isPlayerGame: false,
+      isBotGame: false,
+      isSaveGame: false,
     };
   },
   methods: {
@@ -29,7 +37,20 @@ export default {
      * @param: {string} data - determines which component will be rendered
      */
     onChangeDisplayOption(data) {
-      this.displayOption = data;
+      this.displayOption = data || "";
+      switch (data) {
+        case "newPlayerGame":
+          this.isPlayerGame = true;
+          break;
+        case "newBotGame":
+          this.isBotGame = true;
+          break;
+        case "loadGame":
+          this.isSaveGame = true;
+          break;
+        default:
+          break;
+      }
     },
   },
 };
