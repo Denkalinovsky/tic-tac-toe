@@ -1,70 +1,62 @@
 <template>
   <div class="game">
     <div
-      v-for="(row, indexRow) of playground"
-      :key="indexRow"
-      class="game__row"
+      v-for="(key, indexItem) of gameBoard"
+      :key="indexItem"
+      class="game__item"
+      @click="changeItem(indexItem)"
     >
-      <div
-        v-for="(column, indexColumn) of row"
-        :key="column.key"
-        class="game__row-item"
-        @click="changeTheValueOnTheField(indexRow, indexColumn)"
-      >
-        {{ playground[indexRow][indexColumn].valueField }}
-      </div>
+      {{ gameBoard[indexItem] }}
     </div>
   </div>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-
 export default {
   name: "Game",
   data() {
     return {
       /**
-       * field dimension (int)
+       * who walks {string}
        */
-      gameSize: 3,
+      whoWalks: "X",
       /**
-       * who walks (int) true => "O", false => "X"
+       * game board {object}
        */
-      whoWalks: true,
+      gameBoard: {
+        0: "",
+        1: "",
+        2: "",
+        3: "",
+        4: "",
+        5: "",
+        6: "",
+        7: "",
+        8: "",
+      },
     };
   },
-  computed: {
-    /*
-     * get game board
-     * returns {array[...array]} gameBoard
-     */
-    playground() {
-      return this.$store.state.gameBoard;
-    },
-  },
   methods: {
-    ...mapMutations({
-      startGame: "startGame",
-      changeItem: "changeItem",
-    }),
-    /*
-     * change item payload
+    /**
+     * change the playing field element
+     * @param: {string} indexItem - index in the object "gameBoard" that you want to change
      */
-    changeTheValueOnTheField(rowIndex, columnIndex) {
-      this.$store.commit("changeItem", {
-        rowIndex,
-        columnIndex,
-        valueField: this.whoWalks ? "O" : "X",
-      });
-      this.whoWalks = !this.whoWalks;
+    changeItem(indexItem) {
+      this.gameBoard[indexItem] = this.whoWalks;
+      this.whoWalks = "X" === this.whoWalks ? "O" : "X";
+      this.saveGame();
     },
-  },
-  mounted() {
-    /*
-     * init game board
+    /**
+     * save "game board" and "who walks" to Vuex and localstorage
      */
-    this.startGame();
+    saveGame() {
+      this.$store.commit("saveGame", {
+        gameBoard: this.gameBoard,
+        whoWalks: this.whoWalks,
+      });
+      localStorage.setItem("gameBoard", JSON.stringify(this.gameBoard));
+      localStorage.setItem("whoWalks", this.whoWalks);
+    },
   },
 };
 </script>
