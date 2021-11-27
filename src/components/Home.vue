@@ -6,8 +6,6 @@
     />
     <game
       v-if="'welcome' !== displayOption"
-      :isPlayerGame="isPlayerGame"
-      :isBotGame="isBotGame"
       :isSaveGame="isSaveGame"
       @backToTheMainMenu="clearGame"
     />
@@ -17,6 +15,7 @@
 <script>
 import Welcome from "./Welcome";
 import Game from "./Game";
+import { mapMutations } from "vuex";
 
 export default {
   name: "Home",
@@ -27,23 +26,26 @@ export default {
   data() {
     return {
       displayOption: "welcome",
-      isPlayerGame: false,
-      isBotGame: false,
       isSaveGame: false,
     };
   },
   methods: {
+    ...mapMutations({
+      saveGameMode: "saveGameMode",
+    }),
     /**
-     * change display option
+     * change display option, save game mode
      * @param: {string} data - determines which component will be rendered
      */
     onChangeDisplayOption(data) {
-      this.displayOption = data || "";
+      this.displayOption = data;
       switch (data) {
         case "newPlayerGame":
+          this.saveGameMode("player");
           this.isPlayerGame = true;
           break;
         case "newBotGame":
+          this.saveGameMode("bot");
           this.isBotGame = true;
           break;
         case "loadGame":
