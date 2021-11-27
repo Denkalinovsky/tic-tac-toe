@@ -1,20 +1,81 @@
 .game {
-  width: 540px;
-  display: flex;
-  flex-flow: wrap;
-  flex: 1 1 33%;
+  &__info {
+    color: #fff;
+  }
+  .box {
+    max-width: 500px;
+    max-height: 500px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #060c21;
+    &::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: #fff;
+      z-index: -1;
+    }
 
-  &__item {
-    display: flex;
-    justify-content: center;
-    width: 100px;
-    height: 100px;
-    border: 3px solid #f9f9f9;
-    border-radius: 10px;
-    margin: 5px;
-    padding: 15px;
-    align-items: center;
-    background-color: aquamarine;
+    &::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: #fff;
+      z-index: -2;
+      filter: blur(40px);
+    }
+
+    &::before,
+    &::after {
+      background: linear-gradient(235deg, #0cec0ae0, #2d242469, #c91ed0);
+    }
+
+    .content {
+      width: 100%;
+      height: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+      color: #ffffff;
+    }
   }
 
+  &__board {
+    display: flex;
+    flex-flow: wrap;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__item:nth-child(3n+2),
+  &__item:nth-child(3n+3){
+    border-left: 2px solid #000000;
+  }
+  &__item:nth-child(n+4){
+    border-top: 2px solid #000000;
+  }
+
+  &__item {
+    font-size: 72px;
+    display: flex;
+    justify-content: center;
+    flex: 1 1 25%;
+    height: 33%;
+    align-items: center;
+    background-color: #211a36e8;
+  }
+
+  &__info {
+    width: 320px;
+    padding:16px;
+  }
 }
