@@ -1,29 +1,29 @@
 <template>
-  <div>
-    <ul>
+  <div class="welcome">
+    <ul class="menu cf">
       <li>
-        <button
-          @click="$emit('changeDisplayOption', $event.target.value)"
-          value="newPlayerGame"
-        >
-          Start new game with another player
-        </button>
-      </li>
-      <li>
-        <button
-          @click="$emit('changeDisplayOption', $event.target.value)"
-          value="newBotGame"
-        >
-          Start new game with bot
-        </button>
-      </li>
-      <li v-if="isShowSaveGame">
-        <button
-          @click="$emit('changeDisplayOption', $event.target.value)"
-          value="loadGame"
-        >
-          Load game
-        </button>
+        <a href="#">new game</a>
+        <ul class="submenu">
+          <li
+            @click="$emit('changeDisplayOption', $event.target.value)"
+            value="newPlayerGame"
+          >
+            <a href="#">with player</a>
+          </li>
+          <li
+            @click="$emit('changeDisplayOption', $event.target.value)"
+            value="newBotGame"
+          >
+            <a href="#">with bot</a>
+          </li>
+          <li
+            v-if="isShowSaveGame"
+            @click="$emit('changeDisplayOption', $event.target.value)"
+            value="loadGame"
+          >
+            <a href="#">load game</a>
+          </li>
+        </ul>
       </li>
     </ul>
   </div>
