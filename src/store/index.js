@@ -5,18 +5,18 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     gameBoard: {},
-    whoWalks: "",
+    player: "",
   },
   mutations: {
     /**
      * saving the playing field and who will walk at this point
      * @param: {object} state
      * @param: {object} gameBoard - contains the playing field
-     * @param: {string} whoWalks - contains the who walks
+     * @param: {string} player - contains the who walks
      */
-    saveGame(state, { gameBoard, whoWalks }) {
+    saveGame(state, { gameBoard, player }) {
       state.gameBoard = gameBoard;
-      state.whoWalks = whoWalks;
+      state.player = player;
     },
   },
   getters: {
@@ -29,8 +29,8 @@ export default new Vuex.Store({
     /**
      * get who walks
      * @param: {object} state
-     * @returns: {string} whoWalks
+     * @returns: {string} player
      */
-    getWhoWalks: (state) => state.whoWalks,
+    getWhoWalks: (state) => state.player,
   },
 });
