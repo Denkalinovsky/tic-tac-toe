@@ -9,6 +9,7 @@
       :isPlayerGame="isPlayerGame"
       :isBotGame="isBotGame"
       :isSaveGame="isSaveGame"
+      @backToTheMainMenu="clearGame"
     />
   </div>
 </template>
@@ -51,6 +52,15 @@ export default {
         default:
           break;
       }
+    },
+    /**
+     * set the default values
+     */
+    clearGame() {
+      this.displayOption = "welcome";
+      this.isPlayerGame = false;
+      this.isBotGame = false;
+      this.isSaveGame = false;
     },
   },
 };
