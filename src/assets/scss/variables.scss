@@ -1,0 +1,13 @@
+$grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 1025px,
+        xl: 1200px
+);
+
+/* Grid */
+$bp-sm: map-get($grid-breakpoints, "sm");
+$bp-md: map-get($grid-breakpoints, "md");
+$bp-lg: map-get($grid-breakpoints, "lg");
+$bp-xl: map-get($grid-breakpoints, "xl");
