@@ -20,11 +20,7 @@ export default {
       /**
        * Time now
        */
-      time: "",
-      /**
-       * Game start time
-       */
-      timeInit: new Date(),
+      time: new Date(0),
     };
   },
   methods: {
@@ -33,7 +29,7 @@ export default {
      */
     setTimer() {
       this.timer = setInterval(() => {
-        this.time = new Date();
+        this.time = new Date(this.time.getTime() + 1000);
       }, 1000);
     },
   },
@@ -43,7 +39,7 @@ export default {
      * @returns {string}
      */
     getTimeGame() {
-      const time = new Date(this.time - this.timeInit);
+      let time = new Date(this.time);
       return `${time.getMinutes() + ":" + time.getSeconds()}`;
     },
   },
