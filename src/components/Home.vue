@@ -45,11 +45,9 @@ export default {
       switch (data) {
         case "newPlayerGame":
           this.saveGameMode("player");
-          this.displayOption = data;
           break;
         case "newBotGame":
           this.saveGameMode("bot");
-          this.displayOption = data;
           break;
         case "loadGame":
           this.isSaveGame = true;
