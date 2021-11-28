@@ -22,21 +22,13 @@
   <div v-else>
     <div class="game__end">
       <div>Game end</div>
-      <div v-if="getPossibleMoves(gameBoard).length !== 0">Winner: {{ player }}</div>
+      <div v-if="getPossibleMoves(gameBoard).length !== 0">
+        Winner: {{ player }}
+      </div>
       <div v-else>Draw</div>
       <div>Game time: {{ gameEndTimer }}</div>
-      <div class="container">
-        <div class="center">
-          <button class="btn"  @click="$emit('backToTheMainMenu')">
-            <svg width="180px" height="60px" viewBox="0 0 180 60" class="border">
-              <polyline points="179,1 179,59 1,59 1,1 179,1" class="bg-line" />
-              <polyline points="179,1 179,59 1,59 1,1 179,1" class="hl-line" />
-            </svg>
-            <span>Back to the main menu</span>
-          </button>
-        </div>
-      </div>
-      </div>
+      <Btn @backToTheMainMenu="$emit('backToTheMainMenu')" />
+    </div>
   </div>
 </template>
 
@@ -44,10 +36,11 @@
 import { checkGame, getScore, clone } from "../../helpers";
 import { mapGetters } from "vuex";
 import Timer from "./Timer";
+import Btn from "./Btn";
 
 export default {
   name: "Game",
-  components: { Timer },
+  components: { Timer, Btn },
   props: {
     isSaveGame: Boolean,
   },
