@@ -11,7 +11,11 @@
             v-for="(_, indexItem) of gameBoard"
             :key="indexItem"
             class="game__item"
-            @click="gameMode === 'player' ? changeItem(indexItem) : performMove(indexItem)"
+            @click="
+              gameMode === 'player'
+                ? changeItem(indexItem)
+                : performMove(indexItem)
+            "
           >
             {{ gameBoard[indexItem] }}
           </div>
@@ -123,9 +127,11 @@ export default {
      * @returns: {boolean}
      */
     isGameOver(board) {
-      return !!(checkGame(board, "X") ||
+      return !!(
+        checkGame(board, "X") ||
         checkGame(board, "O") ||
-        this.getPossibleMoves(board).length === 0);
+        this.getPossibleMoves(board).length === 0
+      );
     },
     /**
      * Get the remaining moves on the board
@@ -147,7 +153,9 @@ export default {
       if (this.isEndGame) {
         return;
       }
-      if (!this.doMove(this.gameBoard, index, this.player === "O" ? "O" : "X")) {
+      if (
+        !this.doMove(this.gameBoard, index, this.player === "O" ? "O" : "X")
+      ) {
         // Invalid move
         return;
       }
@@ -157,7 +165,10 @@ export default {
         return;
       }
       let newBoard = clone(this.gameBoard);
-      let aiMove = this.chooseAnOptimalMove(newBoard, this.player === "O" ? "X" : "O");
+      let aiMove = this.chooseAnOptimalMove(
+        newBoard,
+        this.player === "O" ? "X" : "O"
+      );
       this.doMove(this.gameBoard, aiMove.move, this.player === "O" ? "X" : "O");
 
       if (this.isGameOver(this.gameBoard)) {

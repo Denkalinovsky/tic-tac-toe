@@ -5,13 +5,25 @@
         <a href="#">new game</a>
         <ul class="submenu">
           <li>
-            <a @click="$emit('changeDisplayOption', $event.target.type)" type="newPlayerGame">with player</a>
+            <a
+              @click="$emit('changeDisplayOption', $event.target.type)"
+              type="newPlayerGame"
+              >with player</a
+            >
           </li>
           <li>
-            <a @click="$emit('changeDisplayOption', $event.target.type)" type="newBotGame">with bot</a>
+            <a
+              @click="$emit('changeDisplayOption', $event.target.type)"
+              type="newBotGame"
+              >with bot</a
+            >
           </li>
-          <li  v-if="isShowSaveGame">
-            <a @click="$emit('changeDisplayOption', $event.target.type)" type="loadGame">load game</a>
+          <li v-if="isShowSaveGame">
+            <a
+              @click="$emit('changeDisplayOption', $event.target.type)"
+              type="loadGame"
+              >load game</a
+            >
           </li>
         </ul>
       </li>
