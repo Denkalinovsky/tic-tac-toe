@@ -147,7 +147,7 @@ export default {
       if (this.isEndGame) {
         return;
       }
-      if (!this.doMove(this.gameBoard, index, "X")) {
+      if (!this.doMove(this.gameBoard, index, this.player === "O" ? "O" : "X")) {
         // Invalid move
         return;
       }
@@ -157,12 +157,12 @@ export default {
         return;
       }
       let newBoard = clone(this.gameBoard);
-      let aiMove = this.chooseAnOptimalMove(newBoard, "O");
-      this.doMove(this.gameBoard, aiMove.move, "O");
+      let aiMove = this.chooseAnOptimalMove(newBoard, this.player === "O" ? "X" : "O");
+      this.doMove(this.gameBoard, aiMove.move, this.player === "O" ? "X" : "O");
 
       if (this.isGameOver(this.gameBoard)) {
         localStorage.clear();
-        this.player = "O";
+        this.player = this.player === "O" ? "X" : "O";
         this.isEndGame = true;
         return;
       }
@@ -219,6 +219,19 @@ export default {
     getTimeEndGame(data) {
       this.gameEndTimer = data;
     },
+    /**
+     * Random when playing with a bot (who goes first)
+     */
+    whoStarts() {
+      if (this.gameMode === "bot") {
+        this.player = Math.round(Math.random()) > 0 ? "O" : "X";
+        if (this.player === "O") {
+          let newBoard = clone(this.gameBoard);
+          let aiMove = this.chooseAnOptimalMove(newBoard, "X");
+          this.doMove(this.gameBoard, aiMove.move, "X");
+        }
+      }
+    },
   },
   computed: {
     ...mapGetters({
@@ -239,6 +252,7 @@ export default {
      * Load game mode
      */
     this.gameMode = this.getGameMode;
+    this.whoStarts();
   },
 };
 </script>
