@@ -14,6 +14,6 @@
 
 <script>
 export default {
-  name: "Btn"
+  name: "BackToMenuButton"
 };
 </script>

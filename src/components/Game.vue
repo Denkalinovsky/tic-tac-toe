@@ -31,32 +31,26 @@
       </div>
       <div v-else>Draw</div>
       <div>Game time: {{ gameEndTimer }}</div>
-      <Btn @backToTheMainMenu="$emit('backToTheMainMenu')" />
+      <BackToMenuButton @backToTheMainMenu="$emit('backToTheMainMenu')" />
     </div>
   </div>
 </template>
 
 <script>
-import { checkGame, getScore, clone } from "../../helpers";
+import { checkGame, getScore, clone } from "../utils/helpers";
 import { mapGetters } from "vuex";
 import Timer from "./Timer";
-import Btn from "./Btn";
+import BackToMenuButton from "./BackToMenuButton";
 
 export default {
   name: "Game",
-  components: { Timer, Btn },
+  components: { Timer, BackToMenuButton },
   props: {
     isSaveGame: Boolean,
   },
   data() {
     return {
-      /**
-       * Player
-       */
       player: "X",
-      /**
-       * Game board
-       */
       gameBoard: {
         0: "",
         1: "",
