@@ -236,7 +236,7 @@ export default {
     whoStarts() {
       if (this.gameMode === "bot") {
         this.player = Math.round(Math.random()) > 0 ? "O" : "X";
-        if (this.player === "O") {
+        if (this.player === "O" && !this.isSaveGame) {
           let newBoard = clone(this.gameBoard);
           let aiMove = this.chooseAnOptimalMove(newBoard, "X");
           this.doMove(this.gameBoard, aiMove.move, "X");
