@@ -18,9 +18,9 @@ export default {
        */
       timer: "",
       /**
-       * Time now
+       * Time init (Thu Jan 01 1970 00:00:00 GMT+0300 (Москва, стандартное время))
        */
-      time: new Date(0),
+      time: new Date(0 - 1000 * 60 * 60 * 3),
     };
   },
   methods: {
@@ -36,11 +36,11 @@ export default {
   computed: {
     /**
      * Get game time
-     * @returns {string}
+     * @returns {string} 00:00:00
      */
     getTimeGame() {
       let time = new Date(this.time);
-      return `${time.getMinutes() + ":" + time.getSeconds()}`;
+      return time.toLocaleTimeString();
     },
   },
   mounted() {
