@@ -25,6 +25,9 @@ export default {
   },
   data() {
     return {
+      /**
+       * {string} newPlayerGame/newBotGame/loadGame/welcome
+       */
       displayOption: "welcome",
       isSaveGame: false,
     };
@@ -42,11 +45,11 @@ export default {
       switch (data) {
         case "newPlayerGame":
           this.saveGameMode("player");
-          this.isPlayerGame = true;
+          this.displayOption = data;
           break;
         case "newBotGame":
           this.saveGameMode("bot");
-          this.isBotGame = true;
+          this.displayOption = data;
           break;
         case "loadGame":
           this.isSaveGame = true;
@@ -60,8 +63,6 @@ export default {
      */
     clearGame() {
       this.displayOption = "welcome";
-      this.isPlayerGame = false;
-      this.isBotGame = false;
       this.isSaveGame = false;
     },
   },
